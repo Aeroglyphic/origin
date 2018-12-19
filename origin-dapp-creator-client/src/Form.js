@@ -73,7 +73,7 @@ const ConfigForm = props => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h4></h4>
+      <h4>Domain</h4>
       <TextInput
         id='subdomain'
         type='text'
@@ -85,7 +85,15 @@ const ConfigForm = props => {
         onBlur={handleBlur}
       />
 
-    <Button type="submit"
+      <h4>Title & Description</h4>
+
+      <h4>Logos & Icons</h4>
+
+      <h4>Languages</h4>
+
+      <h4>Colors</h4>
+
+      <Button type="submit"
           className="mt-3"
           large={true}
           intent={Intent.PRIMARY}
