@@ -1,19 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Intent } from '@blueprintjs/core'
-import superagent from 'superagent'
-
-import AboutField from 'components/fields/AboutField'
-import TitleField from 'components/fields/TitleField'
-import LanguageCodeField from 'components/fields/LanguageCodeField'
-import LogoUrlField from 'components/fields/LogoUrlField'
-import IconUrlField from 'components/fields/IconUrlField'
-import DomainField from 'components/fields/DomainField'
-import ColorPicker from 'components/ColorPicker'
-
-import { AppToaster } from '../toaster'
 
 import { baseConfig } from 'origin-dapp/src/config'
+import { AppToaster } from '../toaster'
+import ConfigForm from '../Form'
 
 class Create extends Component {
   constructor(props, context) {
@@ -21,8 +11,7 @@ class Create extends Component {
 
     this.state = {
       config: baseConfig,
-      publishing: false,
-      previewing: false
+      isPreview: false
     }
 
     this.web3Context = context.web3
@@ -111,69 +100,7 @@ class Create extends Component {
       <div className="p-3">
         <h3>Create DApp Configuration</h3>
 
-        <h4>Domain</h4>
-
-        <DomainField value={this.state.config.subdomain}
-          onChange={this.handleInputChange}>
-        </DomainField>
-
-        <h4>Title & Description</h4>
-
-        <TitleField value={this.state.config.title}
-          onChange={this.handleInputChange}>
-        </TitleField>
-        <AboutField value={this.state.config.about}
-          onChange={this.handleInputChange}>
-        </AboutField>
-
-        <h4>Logos and Icons</h4>
-
-        <LogoUrlField value={this.state.config.logoUrl}
-          onChange={this.handleInputChange}>
-        </LogoUrlField>
-        <IconUrlField value={this.state.config.iconUrl}
-          onChange={this.handleInputChange}>
-        </IconUrlField>
-
-
-        <h4>Languages</h4>
-
-        <LanguageCodeField value={this.state.config.locale}
-          onChange={this.handleInputChange}>
-        </LanguageCodeField>
-
-        <h4>Colors</h4>
-
-        <ColorPicker label="Navbar Background"
-          name="dusk"
-          value={this.state.config.cssVars.dusk}
-          onChange={this.handleColorChange}>
-        </ColorPicker>
-        <ColorPicker label="Searchbar Background"
-          name="paleGrey"
-          value={this.state.config.cssVars.paleGrey}
-          onChange={this.handleColorChange}>
-        </ColorPicker>
-        <ColorPicker label="Featured Tag"
-          name="goldenRod"
-          value={this.state.config.cssVars.goldenRod}
-          onChange={this.handleColorChange}>
-        </ColorPicker>
-
-        <Button className="mt-3"
-            large={true}
-            intent={Intent.PRIMARY}
-            onClick={this.handlePublish}
-            disabled={this.state.publishing}>
-          {this.state.publishing ? 'Loading' : 'Publish' }
-        </Button>
-
-        <Button className="ml-2 mt-3"
-            large={true}
-            onClick={this.handlePreview}
-            disabled={this.state.previewing}>
-          {this.state.previewing ? 'Loading' : 'Preview' }
-        </Button>
+        <ConfigForm config={this.state}></ConfigForm>
       </div>
     )
   }
@@ -184,8 +111,3 @@ Create.contextTypes = {
 }
 
 export default Create
-
-require('react-styl')(`
-  h4
-    margin-top: 2rem;
-`)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, HTMLSelect, InputGroup, FormGroup } from '@blueprintjs/core'
+import superagent from 'superagent'
 
 class SubdomainField extends Component {
   constructor (props) {
@@ -15,8 +16,7 @@ class SubdomainField extends Component {
     this.setState({ domainType: event.target.value })
   }
 
-  handleChange (event) {
-    // TODO validate subdomain does not have an entry already
+  async handleChange (event) {
     this.props.onChange(event)
   }
 
